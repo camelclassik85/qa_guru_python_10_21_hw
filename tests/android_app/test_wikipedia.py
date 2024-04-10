@@ -22,5 +22,4 @@ def test_another_search():
     with allure.step('Open content page'):
         results = browser.all((AppiumBy.ID, 'org.wikipedia.alpha:id/page_list_item_title'))
         results.should(have.size_greater_than(0))
-        results.first.should(have.text("Android"))
-        results.first.click()
+        results.first.should(have.text("Android")).click()

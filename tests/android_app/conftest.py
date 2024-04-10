@@ -3,7 +3,8 @@ import pytest
 from selene import browser
 from appium.options.android import UiAutomator2Options
 from appium import webdriver
-from utils.constants import config
+from utils import allure_attach
+from config import config
 
 
 @pytest.fixture(scope='function', autouse=True)
@@ -25,13 +26,21 @@ def mobile_management():
         }
     })
 
-    # browser.config.driver = webdriver.Remote(BASE_URL, options=options)
-    browser.config.driver_remote_url = config.base_url
-    browser.config.driver_options = options
-
+    browser.config.driver = webdriver.Remote(config.base_url, options=options)
     browser.config.timeout = config.timeout
 
     yield
 
+    session_id = browser.driver.session_id
+
+    with allure.step('Add screenshot'):
+        allure_attach.attach_screenshot(browser)
+
+    with allure.step('Add html'):
+        allure_attach.attach_xml(browser)
+
     with allure.step('tear down app session'):
         browser.quit()
+
+    with allure.step('Add video'):
+        allure_attach.attach_video(session_id)
