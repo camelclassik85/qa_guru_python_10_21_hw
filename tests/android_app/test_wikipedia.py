@@ -4,7 +4,7 @@ from selene import browser, have
 
 
 def test_search():
-    with allure.step('Type search'):
+    with allure.step('Type search Appium'):
         browser.element((AppiumBy.ACCESSIBILITY_ID, "Search Wikipedia")).click()
         browser.element((AppiumBy.ID, "org.wikipedia.alpha:id/search_src_text")).type("Appium")
 
@@ -15,7 +15,7 @@ def test_search():
 
 
 def test_another_search():
-    with allure.step('Type search'):
+    with allure.step('Type search Android'):
         browser.element((AppiumBy.ACCESSIBILITY_ID, "Search Wikipedia")).click()
         browser.element((AppiumBy.ID, "org.wikipedia.alpha:id/search_src_text")).type("Android")
 
