@@ -17,9 +17,9 @@ def mobile_management():
         "app": "bs://sample.app",
 
         'bstack:options': {
-            "projectName": "Second Python project",
-            "buildName": "browserstack-build-2",
-            "sessionName": "BStack second_test",
+            "projectName": "IOS app Python project",
+            "buildName": "ios-browserstack-build",
+            "sessionName": "IOS",
 
             "userName": config.user_name,
             "accessKey": config.access_key
