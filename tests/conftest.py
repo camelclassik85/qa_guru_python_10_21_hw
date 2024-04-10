@@ -10,18 +10,18 @@ from config import config
 
 @allure.step('Select platform according running test folder')
 def pytest_addoption(parser):
-    parser.addoption('--test_folder')
+    parser.addoption('--platform')
 
 
 @pytest.fixture(scope='function', autouse=True)
 def mobile_management(request):
-    test_folder = request.config.getoption("--test_folder")
+    platform = request.config.getoption("--platform")
     try:
-        test_folder = test_folder.lower()
+        platform = platform.lower()
     except AttributeError:
-        with allure.step('Absent --test_folder=value in start test command'):
-            raise ValueError('Absent --test_folder=value in start test command')
-    if 'android' in test_folder.lower():
+        with allure.step('Absent --platform=value in start test command'):
+            raise ValueError('Absent --platform=value in start test command')
+    if 'android' in platform.lower():
         with allure.step('Android driver config create'):
             options = UiAutomator2Options().load_capabilities({
                 "platformName": "android",
@@ -39,7 +39,7 @@ def mobile_management(request):
                     "accessKey": config.access_key
                 }
             })
-    elif 'ios' in test_folder.lower():
+    elif 'ios' in platform.lower():
         with allure.step('IOS driver config create'):
             options = XCUITestOptions().load_capabilities({
                 "deviceName": "iPhone XS",
@@ -58,8 +58,8 @@ def mobile_management(request):
                 }
             })
     else:
-        with allure.step('Incorrect --test_folder value in start test command'):
-            raise ValueError('Incorrect --test_folder value in start test command')
+        with allure.step('Incorrect --platform value in start test command'):
+            raise ValueError('Incorrect --platform value in start test command')
 
     browser.config.driver = webdriver.Remote(config.base_url, options=options)
     browser.config.timeout = config.timeout

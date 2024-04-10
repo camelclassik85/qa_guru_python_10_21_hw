@@ -12,5 +12,5 @@
 ## Запуск локально:
 Нужно прописать путь до папки с тестами android или ios(например, test/android_app ) и добавить параметр --test_folder, в котором должно фигурировать название платформы
 ### примеры запуска:
-- pytest tests/ios_app --test_folder=ios
-- pytest tests/ios_app --test_folder=ios_app
+- pytest tests/ios_app --platform=ios
+- pytest tests/ios_app --platform=ios_app
