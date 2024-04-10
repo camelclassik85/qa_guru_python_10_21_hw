@@ -22,7 +22,7 @@ def mobile_management(request):
         with allure.step('Absent --test_folder=value in start test command'):
             raise ValueError('Absent --test_folder=value in start test command')
     if 'android' in test_folder.lower():
-        with allure.step('IOS driver config create'):
+        with allure.step('Android driver config create'):
             options = UiAutomator2Options().load_capabilities({
                 "platformName": "android",
                 "platformVersion": "9.0",
